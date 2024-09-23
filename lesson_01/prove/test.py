@@ -37,7 +37,7 @@ from cse251 import *
 You may change the following variable to `False` to skip drawing part 1, but you
 must set this value back to `True` when submitting the assignment.
 """
-draw_part_1 = True # <--- You may change this but read above.
+draw_part_1 = False # <--- You may change this but read above.
 
 def draw_square(tur, x, y, side, color='black'):
     """Draw Square"""
@@ -214,16 +214,15 @@ def run_with_threads(tur, log, main_turtle):
     # You are free to change any functions in this code except those we marked DO NOT CHANGE.
 
     # make four locks.... I only needed one lock.... The results are funny with four locks
-    # lock_circle = threading.Lock()
-    # lock_triangle = threading.Lock()
-    # lock_square = threading.Lock()
-    # lock_rectangle = threading.Lock()
-    lock = threading.Lock()
+    lock_circle = threading.Lock()
+    lock_triangle = threading.Lock()
+    lock_square = threading.Lock()
+    lock_rectangle = threading.Lock()
 
-    t_square = threading.Thread(target=draw_squares_thread, args=(tur, lock))
-    t_circle = threading.Thread(target=draw_circles_thread, args=(tur, lock))
-    t_triangle = threading.Thread(target=draw_triangles_thread, args=(tur, lock))
-    t_rectangle = threading.Thread(target=draw_rectangles_thread, args=(tur, lock))
+    t_square = threading.Thread(target=draw_squares_thread, args=(tur, lock_square))
+    t_circle = threading.Thread(target=draw_circles_thread, args=(tur, lock_square))
+    t_triangle = threading.Thread(target=draw_triangles_thread, args=(tur, lock_square))
+    t_rectangle = threading.Thread(target=draw_rectangles_thread, args=(tur, lock_square))
 
 
     t_square.start()
